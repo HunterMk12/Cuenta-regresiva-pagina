@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cuenta Regresiva</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+          background: #0f172a;
+          color: #f8fafc;
+        }
+        h1 {
+          font-size: 2rem;
+          margin-bottom: 20px;
+        }
+        #countdown {
+          font-size: 2.5rem;
+          font-weight: bold;
+          margin-bottom: 20px;
+        }
+        #link {
+          display: none;
+          margin-top: 20px;
+        }
+        a {
+          color: #38bdf8;
+          text-decoration: none;
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+        a:hover {
+          text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Cuenta regresiva</h1>
+<div id="countdown">Cargando...</div>
+<div id="link">
+    <a href="https://store.steampowered.com/app/1030300/Hollow_Knight_Silksong/" target="_blank">
+        Ir a la página del juego
+    </a>
+</div>
+<script>
+    const targetDate = new Date("2025-09-04T14:00:00Z");
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate.getTime() - now;
+
+      if (distance <= 0) {
+        document.getElementById("countdown").innerHTML = "00:00:00";
+        document.getElementById("link").style.display = "block";
+        clearInterval(timer);
+        return;
+      }
+      const hours = Math.floor((distance / (1000 * 60 * 60)));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("countdown").innerHTML =
+        `${hours.toString().padStart(2, "0")}:` +
+        `${minutes.toString().padStart(2, "0")}:` +
+        `${seconds.toString().padStart(2, "0")}`;
+    }
+    const timer = setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+</body>
+</html>
+
